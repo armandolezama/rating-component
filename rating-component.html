@@ -1,0 +1,74 @@
+<link rel="import" href="../polymer/polymer-element.html">
+\
+<link rel="import" href="./rating-component-icons.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+
+<dom-module id="rating-component">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            .star {
+                --iron-icon-width: 16px;
+                --iron-icon-height: 16px;
+                color: var(--rating-component-color, rgb(158, 158, 158));
+            }
+
+            .active {
+                color: var(--rating-component-active-color, rgb(255, 193, 7));
+            }
+        </style>
+        <div class="rating-container">
+            <iron-icon class="star" icon="rating:star"></iron-icon>
+            <iron-icon class="star" icon="rating:star"></iron-icon>
+            <iron-icon class="star" icon="rating:star"></iron-icon>
+            <iron-icon class="star" icon="rating:star"></iron-icon>
+            <iron-icon class="star" icon="rating:star"></iron-icon>
+        </div>
+    </template>
+
+    <script>
+        /**
+         * `rating-component`
+         *
+         *
+         * @customElement
+         * @polymer
+         * @demo demo/index.html
+         */
+        class RatingComponent extends Polymer.Element {
+            static get is() {
+                return 'rating-component';
+            }
+
+            static get properties() {
+                return {
+                    rate: {
+                        type: Number,
+                        value: 0,
+                        observer: '__getRate'
+                    }
+                };
+            }
+
+            __getRate() {
+                const stars = this.shadowRoot.querySelectorAll('.star');
+                this.__clearStar(stars);
+                for (let index = 0; index < this.rate; index++) {
+                    const star = stars[index];
+                    star.classList.add('active');
+                }
+            }
+
+            __clearStar(stars) {
+                for (const star of stars) {
+                    star.classList.remove('active');
+                }
+            }
+        }
+
+        window.customElements.define(RatingComponent.is, RatingComponent);
+    </script>
+</dom-module>
