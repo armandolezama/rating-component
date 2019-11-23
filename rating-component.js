@@ -21,19 +21,34 @@ class RatingComponent extends Polymer.Element {
         };
     }
 
-    __getRate() {
+    __onClick() {
+        console.log('event fired');
         const stars = this.shadowRoot.querySelectorAll('.star');
         this.__clearStar(stars);
+
+        for (const star of stars) {
+            console.log(typeof star);
+            star.addEventListener('click', () => {
+                this.rate = star.id;
+            });
+        };
+
+    }
+    __getRate() {
+        this.__onClick()
+        const stars = this.shadowRoot.querySelectorAll('.star');
+        this.__clearStar(stars);
+
         for (let index = 0; index < this.rate; index++) {
             const star = stars[index];
             star.classList.add('active');
-        }
+        };
     }
 
     __clearStar(stars) {
         for (const star of stars) {
             star.classList.remove('active');
-        }
+        };
     }
 }
 
