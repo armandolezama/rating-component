@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
@@ -14,18 +15,26 @@
 
     <custom-style>
         <style is="custom-style" include="demo-pages-shared-styles">
+
         </style>
     </custom-style>
 </head>
+
 <body>
-<div class="vertical-section-container centered">
-    <h3>Basic rating-component demo</h3>
-    <demo-snippet>
-        <template>
+    <div class="vertical-section-container centered">
+        <h3>Basic rating-component demo</h3>
+        <demo-snippet>
+            <template>
             <rating-component rate="2"></rating-component>
-            
+            <script>
+                document.querySelector('rating-component').addEventListener('rate-click', (e)=> {
+                    console.log(e.detail)
+                    this.rate = e.detail.rate
+                })
+            </script>
         </template>
-    </demo-snippet>
-</div>
+        </demo-snippet>
+    </div>
 </body>
+
 </html>
